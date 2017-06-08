@@ -6,6 +6,7 @@ const ArticleList = () => {
       _id: false,
       __v: false
     })
+    .populate('user', 'nickname')
     .then(result => {
       resolve(result)
     })

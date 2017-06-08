@@ -6,7 +6,13 @@ const api = new Router()
 
 api.get('/article', async (ctx) => {
   let list = await ArticleList()
-  ctx.body = list
+  ctx.body = list.map(item => {
+    return {
+      title: item.title,
+      content: item.content,
+      user: item.user.nickname
+    }
+  })
 })
 
 api.get('/article/:title', async (ctx) => {
