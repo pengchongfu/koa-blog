@@ -1,6 +1,9 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
+  <div>
+    <v-toolbar class="green" light>
+      <v-toolbar-side-icon light></v-toolbar-side-icon>
+      <v-toolbar-title class="hidden-sm-and-down">博客</v-toolbar-title>
+    </v-toolbar>
     <router-view></router-view>
   </div>
 </template>
@@ -12,12 +15,4 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
