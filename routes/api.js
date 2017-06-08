@@ -1,5 +1,5 @@
 import Router from 'koa-router'
-import { ArticleList, createArticle } from '../controllers/article'
+import { ArticleList, createArticle, ArticleDetail } from '../controllers/article'
 import Models from '../models'
 
 const api = new Router()
@@ -7,6 +7,15 @@ const api = new Router()
 api.get('/article', async (ctx) => {
   let list = await ArticleList()
   ctx.body = list
+})
+
+api.get('/article/:title', async (ctx) => {
+  let detail = await ArticleDetail(ctx.params.title)
+  ctx.body = {
+    title: detail.title,
+    content: detail.content,
+    user: detail.user.nickname
+  }
 })
 
 api.post('/article', async (ctx) => {

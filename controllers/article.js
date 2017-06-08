@@ -15,6 +15,24 @@ const ArticleList = () => {
   })
 }
 
+const ArticleDetail = (title) => {
+  return new Promise((resolve, reject) => {
+    Models.Article.findOne({
+      title
+    }, {
+      _id: false,
+      __v: false
+    })
+    .populate('user')
+    .then(result => {
+      resolve(result)
+    })
+    .catch(e => {
+      reject(e.message)
+    })
+  })
+}
+
 const createArticle = (options) => {
   return new Promise((resolve, reject) => {
     Models.Article.create(options)
@@ -29,5 +47,6 @@ const createArticle = (options) => {
 
 export {
   ArticleList,
-  createArticle
+  createArticle,
+  ArticleDetail
 }
