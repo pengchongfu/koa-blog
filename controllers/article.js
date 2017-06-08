@@ -15,6 +15,19 @@ const ArticleList = () => {
   })
 }
 
+const createArticle = (options) => {
+  return new Promise((resolve, reject) => {
+    Models.Article.create(options)
+    .then(result => {
+      resolve(result)
+    })
+    .catch(e => {
+      reject(e.message)
+    })
+  })
+}
+
 export {
-  ArticleList
+  ArticleList,
+  createArticle
 }

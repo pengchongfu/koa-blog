@@ -1,9 +1,10 @@
 import Koa from 'koa'
+import bodyParser from 'koa-bodyparser'
+import routes from './routes'
 
 const app = new Koa()
 
-app.use(async (ctx) => {
-  ctx.body = 'hello koa'
-})
+app.use(bodyParser())
+app.use(routes)
 
 app.listen(3000)
