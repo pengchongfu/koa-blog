@@ -16,7 +16,7 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-row actions>
-          <v-btn flat class="green--text darken-1">查看</v-btn>
+          <v-btn flat class="green--text darken-1" @click.native="goToDetail(item.title)">查看</v-btn>
         </v-card-row>
       </v-card>
     </v-flex>
@@ -37,6 +37,9 @@ export default {
   methods: {
     marked (value) {
       return marked(value)
+    },
+    goToDetail (title) {
+      this.$router.push(`/${title}`)
     }
   },
   created () {

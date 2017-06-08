@@ -1,9 +1,9 @@
 <template>
-  <v-layout row wrap>
+  <v-layout row wrap class="detail">
     <v-flex xs8 offset-xs2>
       <div class="title">{{ this.title }}</div>
       <div class="user">{{ this.user }}</div>
-      <div class="content" v-html="marked(content)"></div>
+      <div class="markdown" v-html="marked(content)"></div>
     </v-flex>
   </v-layout>
 </template>
@@ -37,6 +37,10 @@ export default {
 </script>
 
 <style scoped>
+.detail {
+  padding-top: 56px;
+}
+
 .title {
   text-align: center;
   margin: 50px 0 0;
@@ -45,7 +49,6 @@ export default {
   text-align: center;
   line-height: 30px;
 }
-.content p {
-  line-height: 50px;
+.markdown {
 }
 </style>
