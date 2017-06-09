@@ -2,6 +2,7 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import routes from './routes'
 import Models from './models'
+import { getUser } from './controllers/user'
 
 import session from 'koa-session'
 
@@ -46,6 +47,12 @@ app.use(session({
   signed: false,
   store: new MongoStore()
 },app))
+
+app.use(async (ctx, next) => {
+  let user = await getUser()
+  ctx.state.user = user
+  await next()
+})
 
 app.use(async (ctx, next) => {
   await next()
