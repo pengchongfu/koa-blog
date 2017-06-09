@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import Article from './article'
 import User from './user'
+import Session from './session'
 mongoose.Promise = global.Promise
 
 mongoose.connect('mongodb://127.0.0.1:27017/koa-blog', err => {
@@ -12,5 +13,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/koa-blog', err => {
 
 export default {
   Article,
-  User
+  User,
+  Session
 }
