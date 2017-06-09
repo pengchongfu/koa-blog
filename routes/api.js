@@ -1,6 +1,6 @@
 import Router from 'koa-router'
 import { ArticleList, createArticle, ArticleDetail } from '../controllers/article'
-import { getUser } from '../controllers/user'
+import { getUser, createUser } from '../controllers/user'
 import Models from '../models'
 
 const api = new Router()
@@ -41,6 +41,22 @@ api.post('/login', async (ctx) => {
     ctx.session.user = user['_id']
   }
   ctx.body = user
+})
+
+api.post('/register', async (ctx) => {
+  let user
+  try {
+    user = await createUser(ctx.request.body)
+  } catch (e) {
+    console.log(e)
+  }
+  if (user) {
+    ctx.state.user = user
+    ctx.session.user = user['_id']
+    ctx.body = 'sussess'
+  } else {
+    ctx.body = 'fail'
+  }
 })
 
 export default api
