@@ -64,3 +64,5 @@ app.use(bodyParser())
 app.use(routes)
 
 app.listen(3000)
+
+export default app
