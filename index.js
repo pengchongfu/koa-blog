@@ -6,6 +6,27 @@ import { getUser } from './controllers/user'
 
 import session from 'koa-session'
 
+import path from 'path'
+import log4js from 'log4js'
+log4js.configure({
+  appenders:
+    [
+      {
+        "category":"resLogger",
+        "type": "dateFile",
+        "filename": path.join(__dirname, 'log'),
+        "alwaysIncludePattern":true,
+        "pattern": "-yyyy-MM-dd-hh.log"
+      }
+    ],
+  levels:
+    {
+      "resLogger":"ALL"
+    }
+})
+
+const resLogger = log4js.getLogger('resLogger')
+
 class MongoStore {
   async get (sid) {
     return new Promise((resolve, reject) => {
@@ -51,6 +72,7 @@ app.use(session({
 app.use(async (ctx, next) => {
   let user = await getUser()
   ctx.state.user = user
+  resLogger.info(`${ctx.req.url}`)
   await next()
 })
 
