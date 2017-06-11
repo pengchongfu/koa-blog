@@ -1,7 +1,7 @@
 <template>
   <v-layout row wrap>
     <v-flex xs8 offset-xs2>
-      <v-card v-for="item in list" class="card">
+      <v-card v-for="(item, index) in list" class="card" :key="index">
         <v-card-row class="blue darken-1">
           <v-card-title>
             <span class="white--text">{{ item.title }}</span>   
