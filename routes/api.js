@@ -8,10 +8,11 @@ const api = new Router()
 api.get('/article', async (ctx) => {
   let list = await ArticleList()
   ctx.body = list.map(item => {
+    let user = item.user.nickname || '匿名用户'
     return {
       title: item.title,
       content: item.content,
-      user: item.user.nickname
+      user
     }
   })
 })
@@ -26,12 +27,13 @@ api.get('/article/:title', async (ctx) => {
 })
 
 api.post('/article', async (ctx) => {
-  let user = await Models.User.findOne({
-    email: 'pengchongfu@gmail.com'
-  })
-  ctx.request.body.user = user
-  let article = await createArticle(ctx.request.body)
-  ctx.body = article
+  if (ctx.session.user) {
+    ctx.request.body.user = ctx.session.user
+    let article = await createArticle(ctx.request.body)
+    ctx.body = article
+  } else {
+    ctx.body = 'please login'
+  }
 })
 
 api.post('/login', async (ctx) => {
